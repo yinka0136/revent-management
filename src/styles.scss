@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "partials/abstract/mixins";
+@import "partials/abstract/variables";
+@import "partials/base/base";
+@import "partials/base/typography";
+@import "partials/base/buttons"; 
+@import "partials/components/forms";
+// @import "partials/components/scrollbar";

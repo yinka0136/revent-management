@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="header_left">
+    <div class="header_left-back pointer" (click)="goBack()" *ngIf="hasBack">
+      <img src="assets/icons/header_back.svg" alt="back" class="header__img" />
+      <p>Back</p>
+    </div>
+    <h4 class="header__heading">{{ title }}</h4>
+    <p class="header__paragraph">
+      {{ paragraph }}
+    </p>
+  </div>
+  <div class="header_right">
+    <!-- <img src="assets/illustrations/welcome.svg" alt="welcome" width="228" /> -->
+  </div>
+  <div class="header_right"></div>
+</div>
