@@ -4,4 +4,5 @@
   <div class="main_head">
     <h4 class="main__heading"></h4>
   </div>
+  <ng-container *ngIf="user"><app-profile [user]="user" [loading$]="userLoading$"></app-profile></ng-container>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { currentPlan, ICurrentUser } from '@core/models/user.model';
+import { ICurrentUser } from '@core/models/user.model';
 import { LocalStorageService } from '@shared/services/local-storage.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -32,9 +32,9 @@ export class CurrentUserService {
     return false;
   }
 
-  public storeUserDetails(userDetails: any) {
+  public storeUserDetails(user: ICurrentUser) {
     this._localStorageAS.remove('revent_user');
-    this._localStorageAS.set('revent_user', userDetails);
+    this._localStorageAS.set('revent_user', user);
     this.setUser();
   }
 
@@ -43,7 +43,7 @@ export class CurrentUserService {
   }
 
   public getUser() {
-    const { jwToken, ...user } = this.getCurrentUser();
+    const { email, ...user } = this.getCurrentUser();
     return user;
   }
 
@@ -56,21 +56,16 @@ export class CurrentUserService {
     return user;
   }
 
-
-
   public getAuthToken(): string | void {
     const user = this.getCurrentUser();
     if (user) {
-      return user.jwToken;
+      return user.reventToken;
     } else {
       this.logOut();
     }
   }
 
-
-
   public getCurrentUserObservable() {
     return this.currentUser.asObservable();
   }
- 
 }

@@ -1,17 +1,15 @@
 export interface ResponseModel<T> {
-  succeeded: boolean
+  succeeded: boolean;
   errors: string[];
   data: T;
   message: string;
 }
 
-export class PaginationResponse<T> {
+export class PaginationResponse {
   pageNumber!: number;
   pageSize!: number;
-  previousPage!: number;
-  result!: T;
-  totalItems!: number;
-  totalPages!: number;
+  totalItems!: number| null;
+  totalPages!: number|null;
 }
 
 export interface SearchDTO {
@@ -19,9 +17,15 @@ export interface SearchDTO {
   pageNumber: number;
   pageSize: number;
   lCApplicationDate?: string;
-  statusId?: number,
+  statusId?: number;
 }
 
+export const InitialPageResponse = {
+  pageNumber: 1,
+  pageSize: 2,
+  totalItems: null,
+  totalPages: null,
+};
 export const InitialSearchDTO = {
   search: '',
   pageNumber: 1,

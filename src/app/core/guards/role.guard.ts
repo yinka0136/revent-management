@@ -23,8 +23,7 @@ export class RoleGuard implements CanActivate {
     | boolean
     | UrlTree {
     const userRole = this._current.getUserRole();
-    if (userRole) {
-      // this.router.navigate([`dashboard/${userRole.toLowerCase()}`]);
+    if (state.url.includes(userRole.toLowerCase())) {
       return true;
     }
 

@@ -1,0 +1,231 @@
+<div class="wrapper">
+  <div class="wrapper_head">
+    <div class="left"><h4>{{initial}}</h4></div>
+    <div class="right">
+      <h4>{{user.lastName}} {{user.firstName}}</h4>
+      <p>{{user.role}}</p>
+    </div>
+  </div>
+  <form [formGroup]="userForm">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="form_group">
+          <label for="name" class="form-label">First Name </label>
+          <input
+            type="text"
+            id="firstname"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="Enter Your First Name"
+            autocomplete="name"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('firstName')!.hasError('required') &&
+                (userForm.get('firstName')!.dirty ||
+                  userForm.get('firstName')!.touched)
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('firstName')?.hasError('required') &&
+              (userForm.get('firstName')?.dirty ||
+                userForm.get('firstName')?.touched)
+            "
+            >Required</span
+          >
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="form_group">
+          <label for="lastName" class="form-label">Last Name </label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            placeholder="Enter Your Last Name"
+            formControlName="lastName"
+            autocomplete="name"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('lastName')!.hasError('required') &&
+                (userForm.get('lastName')!.dirty ||
+                  userForm.get('lastName')!.touched)
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('lastName')?.hasError('required') &&
+              (userForm.get('lastName')?.dirty ||
+                userForm.get('lastName')?.touched)
+            "
+            >Required</span
+          >
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="form_group">
+          <label for="dob" class="form-label">Date Of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            class="form-control"
+            placeholder="Enter DOB"
+            formControlName="dob"
+            autocomplete="name"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('dob')!.hasError('required') &&
+                (userForm.get('dob')!.dirty || userForm.get('dob')!.touched)
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('dob')?.hasError('required') &&
+              (userForm.get('dob')?.dirty || userForm.get('dob')?.touched)
+            "
+            >Required</span
+          >
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6"  *rbacAllow="['admin']">
+        <div class="form_group">
+          <label for="role" class="form-label">Role </label>
+          <select
+            id="role"
+            class="form-control"
+            formControlName="role"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('role')!.hasError('required') &&
+                (userForm.get('role')!.dirty || userForm.get('role')!.touched)
+            }"
+          >
+            <option value="">-- select role --</option>
+            <option value="{{ role }}" *ngFor="let role of ['admin', 'user']">
+              {{ role }}
+            </option>
+            <span
+              class="invalid-feedback"
+              *ngIf="
+                userForm.get('role')?.hasError('required') &&
+                (userForm.get('role')?.dirty || userForm.get('role')?.touched)
+              "
+              >Required</span
+            >
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="form_group">
+          <label for="tel" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            id="tel"
+            class="form-control"
+            placeholder="Enter Mobile Number"
+            formControlName="phoneNumber"
+            autocomplete="tel"
+            [ngClass]="{
+              'is-invalid':
+                (userForm.get('phoneNumber')!.hasError('required') &&
+                  (userForm.get('phoneNumber')!.dirty ||
+                    userForm.get('phoneNumber')!.touched)) ||
+                (userForm.get('phoneNumber')!.hasError('pattern') &&
+                  !userForm.get('phoneNumber')!.hasError('required'))
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('phoneNumber')?.hasError('required') &&
+              (userForm.get('phoneNumber')?.dirty ||
+                userForm.get('phoneNumber')?.touched)
+            "
+            >Required</span
+          >
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('phoneNumber')?.hasError('pattern') &&
+              !userForm.get('phoneNumber')?.hasError('required')
+            "
+            >Please provide a valid phone number</span
+          >
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="form_group">
+          <label for="email" class="form-label">Email </label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="Enter Your Email Address"
+            formControlName="email"
+            autocomplete="email"
+            [ngClass]="{
+              'is-invalid':
+                (userForm.get('email')!.hasError('required') &&
+                  (userForm.get('email')!.dirty ||
+                    userForm.get('email')!.touched)) ||
+                (userForm.get('email')!.hasError('email') &&
+                  !userForm.get('email')!.hasError('required'))
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('email')?.hasError('required') &&
+              (userForm.get('email')?.dirty || userForm.get('email')?.touched)
+            "
+            >Required</span
+          >
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              userForm.get('email')?.hasError('email') &&
+              !userForm.get('email')?.hasError('required')
+            "
+            >Please provide a valid email address</span
+          >
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form_group">
+          <label for="address" class="form-label">Address </label>
+          <textarea
+            id="address"
+            cols="30"
+            placeholder="Address"
+            rows="5"
+            class="form-control"
+            formControlName="address"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('address')!.hasError('required') &&
+                (userForm.get('address')!.dirty ||
+                  userForm.get('address')!.touched)
+            }"
+          >
+    <span
+    class="invalid-feedback"
+    *ngIf="
+      userForm.get('address')?.hasError('required') &&
+      (userForm.get('address')?.dirty || userForm.get('address')?.touched)
+    "
+    >Required</span
+  >
+  </textarea
+          >
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-global-loader [showLoader$]="loading$"></app-global-loader>

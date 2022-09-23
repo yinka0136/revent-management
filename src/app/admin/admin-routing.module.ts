@@ -1,3 +1,4 @@
+import { AccountComponent } from './pages/account/account.component';
 import { ViewUserComponent } from './pages/view-user/view-user.component';
 import { UsersComponent } from './pages/users/users.component';
 
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
   },
   {
     path: 'users/:id',

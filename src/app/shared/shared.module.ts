@@ -1,3 +1,4 @@
+import { NoDataComponent } from './components/no-data/no-data.component';
 import { ReportCardComponent } from './components/report-card/report-card.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { GlobalLoaderComponent } from './components/global-loader/global-loader.component';
@@ -11,6 +12,10 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AgePipe } from './pipes/age.pipe';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RbacDirective } from '@core/directives/rbac.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     NavbarComponent,
     MainHeaderComponent,
     SkeletonLoaderComponent,
+    AgePipe,
+    NoDataComponent, ConfirmationDialogComponent, ProfileComponent,RbacDirective
   ],
   imports: [
     CommonModule,
@@ -30,12 +37,15 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
   ],
-  exports: [
+  exports: [FormsModule,
+    ReactiveFormsModule,
     GlobalLoaderComponent,
     MaterialModule,
     MainHeaderComponent,
     ReportCardComponent,
     SkeletonLoaderComponent,
+    AgePipe,
+    NoDataComponent, ConfirmationDialogComponent, ProfileComponent,RbacDirective
   ],
 })
 export class SharedModule {}

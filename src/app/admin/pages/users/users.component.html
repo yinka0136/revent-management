@@ -6,60 +6,136 @@
 <div class="main">
   <div class="main_head">
     <h4 class="main__heading">Users</h4>
-    <button class="btn_primary btn_sm">New User</button>
+    <mat-form-field>
+      <input
+        matInput
+        #filter
+        (keyup)="applyFilter(filter.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+    <button
+      class="btn_primary btn_sm"
+      (click)="userDialog({ isEditing: false })"
+    >
+      New User
+    </button>
   </div>
   <div class="main_body">
     <section class="d-block d-md-none">
       <div
-        *ngFor="let ticket of filterableUsers"
+        *ngFor="let user of users$ | async"
         class="border br-8 p-4 mb-5"
         style="font-size: 1.4rem"
       >
         <div class="d-flex">
           <label class="fw-bold text-body w-30 text-break">User ID:</label>
           <p class="text-body w-70 ps-3 text-break">
-            {{ ticket?.id || "--" }}
+            {{ user?.id || "--" }}
           </p>
         </div>
         <hr />
         <div class="d-flex">
-          <label class="fw-bold text-body w-30 text-break">Subject:</label>
+          <label class="fw-bold text-body w-30 text-break">Name:</label>
           <p class="text-body w-70 ps-3 text-break">
-            {{ ticket?.subject || "--" }}
+            {{ user?.lastName || "--" }} {{ user?.firstName || "--" }}
           </p>
         </div>
         <hr />
         <div class="d-flex">
-          <label class="fw-bold text-body w-30 text-break">Date:</label>
+          <label class="fw-bold text-body w-30 text-break">Role:</label>
           <p class="text-body w-70 ps-3 text-break">
-            {{ (ticket?.date | date) || "--" }}
+            {{ user?.role || "--" }}
           </p>
         </div>
         <hr />
         <div class="d-flex">
-          <label class="fw-bold text-body w-30 text-break">Status:</label>
+          <label class="fw-bold text-body w-30 text-break">Age:</label>
           <p class="text-body w-70 ps-3 text-break">
-            {{ ticket?.status || "--" }}
+            {{ (user?.dob | age) || "--" }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Phone Number:</label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ user?.phoneNumber || "--" }}
+          </p>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label class="fw-bold text-body w-30 text-break">Date Added:</label>
+          <p class="text-body w-70 ps-3 text-break">
+            {{ (user?.created_at | date) || "--" }}
           </p>
         </div>
         <hr />
         <div class="d-flex">
           <label class="fw-bold text-body w-30 text-break">Action:</label>
-          <img src="assets/icons/trash.svg" alt="trash" />
+          <mat-icon
+          [matMenuTriggerFor]="menu"
+          class="pointer"
+          *ngIf="!user.isDeleting$"
+          >more_horiz</mat-icon
+        >
+        <app-global-loader
+          [showLoader$]="user.isDeleting$"
+          [diameter]="20"
+        ></app-global-loader>
+        <mat-menu #menu="matMenu">
+          <div class="dropdown_item" (click)="view(user.id)">
+            <img src="assets/icons/eye.svg" alt="delete" />
+            <h4>View</h4>
+          </div>
+          <div
+            class="dropdown_item"
+            (click)="
+              userDialog({ isEditing: true, editObject: user })
+            "
+          >
+            <svg
+              width="17"
+              height="16"
+              viewBox="0 0 17 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.9724 3.22287L11.9724 3.22293L11.9785 3.21668C12.0799 3.11162 12.2013 3.02781 12.3355 2.97016L12.1382 2.51076L12.3355 2.97016C12.4697 2.91251 12.6141 2.88217 12.7601 2.8809C12.9062 2.87963 13.051 2.90746 13.1862 2.96277C13.3214 3.01808 13.4442 3.09976 13.5475 3.20304C13.6508 3.30632 13.7325 3.42914 13.7878 3.56433C13.8431 3.69952 13.8709 3.84436 13.8696 3.99042C13.8684 4.13648 13.838 4.28082 13.7804 4.41502L14.2398 4.61237L13.7804 4.41502C13.7227 4.54922 13.6389 4.6706 13.5339 4.77208L13.5338 4.77202L13.5277 4.77817L13.2468 5.05901L11.6915 3.50372L11.9724 3.22287ZM9.85295 5.3423L11.4092 6.89743L5.20533 13.1005H3.65002V11.5452L9.85295 5.3423Z"
+                fill="#4C11AB"
+                stroke="#4C11AB"
+              />
+            </svg>
+            <h4>Edit</h4>
+          </div>
+          <div [hidden]="user.isSuper"
+            class="dropdown_item"
+            (click)="openConfirmationDialog(user)"
+          >
+            <img src="assets/icons/trash.svg" alt="delete" />
+            <h4>Delete</h4>
+          </div>
+        </mat-menu>
         </div>
       </div>
     </section>
     <section class="dashboard-content d-none d-md-block">
       <section class="table-responsive">
         <div>
-          <table class="table caption-top text-nowrap">
+          <table
+            class="table caption-top text-nowrap"
+            matSort
+            (matSortChange)="sortData($event)"
+          >
             <ng-container>
               <thead>
                 <tr>
-                  <th>Ticket ID</th>
-                  <th>Subject</th>
-                  <th>Date</th>
-                  <th>Status</th>
+                  <th mat-sort-header="id">User ID</th>
+                  <th mat-sort-header="name">Name</th>
+                  <th mat-sort-header="role">Role</th>
+                  <th mat-sort-header="age">Age</th>
+                  <th>Phone Number</th>
+                  <th mat-sort-header="date">Date Added</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -75,26 +151,50 @@
                   </td></tr
               ></ng-container>
               <ng-container *ngIf="!usersLoading">
-                <tr *ngFor="let ticket of filterableUsers" class="click">
+                <tr
+                  *ngFor="let user of users$ | async; index as i"
+                  class="click"
+                >
                   <td>
-                    {{ ticket?.id }}
+                    {{ user?.id }}
                   </td>
                   <td>
-                    {{ ticket?.subject }}
+                    {{ user?.lastName || "--" }} {{ user?.firstName || "--" }}
                   </td>
-                  <td>{{ ticket?.date | date }}</td>
-                  <td>{{ ticket?.status }}</td>
                   <td>
-                    <mat-icon [matMenuTriggerFor]="menu" class="pointer"
+                    {{ user?.role }}
+                  </td>
+                  <td>
+                    {{ (user?.dob | age) || "--" }}
+                  </td>
+                  <td>
+                    {{ user?.phoneNumber || "--" }}
+                  </td>
+                  <td>{{ (user?.created_at | date) || "--" }}</td>
+
+                  <td>
+                    <mat-icon
+                      [matMenuTriggerFor]="menu"
+                      class="pointer"
+                      *ngIf="!user.isDeleting$"
                       >more_horiz</mat-icon
                     >
+                    <app-global-loader
+                      [showLoader$]="user.isDeleting$"
+                      [diameter]="20"
+                    ></app-global-loader>
                   </td>
                   <mat-menu #menu="matMenu">
-                    <div class="dropdown_item" routerLink="/2">
+                    <div class="dropdown_item" (click)="view(user.id)">
                       <img src="assets/icons/eye.svg" alt="delete" />
                       <h4>View</h4>
                     </div>
-                    <div class="dropdown_item">
+                    <div
+                      class="dropdown_item"
+                      (click)="
+                        userDialog({ isEditing: true, editObject: user })
+                      "
+                    >
                       <svg
                         width="17"
                         height="16"
@@ -110,27 +210,33 @@
                       </svg>
                       <h4>Edit</h4>
                     </div>
-                    <div class="dropdown_item">
+                    <div [hidden]="user.isSuper"
+                      class="dropdown_item"
+                      (click)="openConfirmationDialog(user)"
+                    >
                       <img src="assets/icons/trash.svg" alt="delete" />
                       <h4>Delete</h4>
                     </div>
                   </mat-menu>
                 </tr>
-           
               </ng-container>
             </tbody>
           </table>
         </div>
       </section>
     </section>
+
     <mat-paginator
-      *ngIf="filterableUsers.length > 0"
-      #paginator
-      [length]="20"
-      [pageIndex]="1"
-      [pageSize]="10"
+      [pageSize]="5"
       aria-label="Select page"
+      [pageSizeOptions]="pageSizeOptions"
     >
     </mat-paginator>
+    <app-no-data
+      name="User"
+      [is_loading]="usersLoading"
+      (open_dialog)="userDialog({ isEditing: true })"
+      *ngIf="(users$ | async)?.length == 0"
+    ></app-no-data>
   </div>
 </div>

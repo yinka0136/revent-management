@@ -1,0 +1,22 @@
+<ng-container *ngIf="!is_loading">
+  <div class="wrapper">
+    <div class="text-center">
+      <div class="wrapper_image">
+        <img [src]="'assets/icons/empty_table.svg'" alt="no Data Img" />
+      </div>
+      <div class="wrapper_header">
+        <h4>{{ "No " + name }}</h4>
+      </div>
+      <div class="wrapper_info">
+        <p>
+          {{ "All " + name + "s  will appear here. " }}
+        </p>
+      </div>
+      <div class="wrapper_action">
+        <button class="btn_primary btn_md" (click)="openAddDialog()">
+          Add {{ name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

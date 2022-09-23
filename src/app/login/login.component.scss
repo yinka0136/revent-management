@@ -1,0 +1,120 @@
+@import "partials/abstract/mixins.scss";
+@import "partials/abstract/variables.scss";
+$nav_bar_height: 12.4rem;
+$footer_height: 7.4rem;
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &-heading {
+    margin-bottom: 0.8rem;
+    font-family: $nunito_font_extra_bold;
+  }
+  &-paragraph {
+    margin-bottom: 3.2rem;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 150%;
+    color: $body;
+  }
+  &__navbar {
+    position: fixed;
+    height: $nav_bar_height;
+    background-color: $light-100;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    width: 100%;
+    padding: 3.8rem 5.5rem;
+
+    @include screenSize(S) {
+      padding: 2.2rem;
+    }
+
+    a {
+      display: flex;
+      flex-direction: row;
+      width: fit-content;
+      text-decoration: none;
+    }
+
+    .text {
+      font-size: 1.8rem;
+      @include screenSize(S) {
+        font-size: 1.7rem;
+      }
+      line-height: 2.4rem;
+      display: flex;
+      align-items: center;
+      margin-left: 2.2rem;
+      color: rgba(0, 0, 0, 0.9);
+    }
+  }
+  &__content {
+    top: $nav_bar_height;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow-y: auto;
+    justify-content: center;
+    height: calc(100% - 12.4rem);
+
+    .form {
+      max-width: 35.6rem;
+      width: 35.6rem;
+      @include screenSize(S) {
+        width: 100%;
+      }
+      p,
+      a {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+      }
+      &__header {
+        text-align: center;
+        margin-bottom: 6.2rem;
+        h6 {
+          font-size: 2.2rem;
+          line-height: 2.6rem;
+          color: rgba($dark, 0.9);
+          margin-bottom: 0.8rem;
+        }
+        p {
+          color: rgba($dark, 0.6);
+        }
+      }
+      &__form {
+        .form_group {
+          margin-bottom: 1.8rem;
+          label {
+            font-size: 1.4rem;
+            line-height: 1.7rem;
+            color: rgba($dark, 0.6);
+          }
+        }
+
+        .smaller_margin {
+          margin-bottom: 1.3rem !important;
+        }
+      }
+    }
+  }
+  &__footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3.2rem;
+    height: 4.2rem 0 0 0;
+    .text {
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+  }
+}

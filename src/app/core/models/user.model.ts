@@ -1,29 +1,32 @@
+import { Observable } from 'rxjs';
+
 export interface ICurrentUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  fullName: string;
   email: string;
-  id: string;
-  isVerified: true;
-  jwToken: string;
-  refreshToken: string;
-  refreshTokenExpiration: string;
+  dob: string;
+  phoneNumber: string;
+  address: string;
+  password:string;
   role: string;
-  tokenExpires: string;
-  userId: string;
-  userName: string;
-  currentSubscription: currentPlan;
+  created_at: string;
+  reventToken: string;
+  isDeleting$: Observable<boolean>;
+  isSuper: boolean
 }
 
-export class currentPlan {
-  constructor(
-    public accessCode: string,
-    public amount: number,
-    public apiCallCountUsed: number,
-    public durationInMonth: number,
-    public endDate: string,
-    public isActive: boolean,
-    public paymentStatusId: number,
-    public plan: string,
-    public planId: string,
-    public referenceNo: string,
-    public startDate: string
-  ) {}
+export interface IUserDTO {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  dob: string;
+  phoneNumber: string;
+  address: string;
+  role: string;
+  created_at: string;
+  reventToken: string;
+  isDeleting$: Observable<boolean>;
 }

@@ -1,3 +1,4 @@
+import { ICurrentUser } from '@core/models/user.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,15 +9,15 @@ export class UtilityService {
 
 
 
-  public getInitial(username: any) {
-    if (username) {
-      let firstName = username.split(' ')[0];
-      let lastName = username.split(' ')[1];
+  public getInitial(user: ICurrentUser) : string{
+    if (user) {
+      let firstName = user.firstName;
+      let lastName = user.lastName;
       return (
-        firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase()
+        lastName.charAt(0).toUpperCase() + firstName.charAt(0).toUpperCase()
       );
     }
 
-    return;
+    return 'User';
   }
 }

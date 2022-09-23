@@ -7,3 +7,22 @@
 @import "partials/base/buttons"; 
 @import "partials/components/forms";
 // @import "partials/components/scrollbar";
+
+.cdk-overlay-pane {
+    max-width: 91vw !important;
+    .mat-dialog-container {
+      width: 85rem !important;
+    }
+  }
+  
+  .mat-dialog-title {
+   
+    font-family: $nunito_font_bold !important;
+  }
+  
+  .mat-dialog-container {
+    padding: 2.4rem 4rem 4rem 4rem !important;
+  }
+  .modal-width .mat-dialog-container {
+    max-width: 52rem !important;
+  }

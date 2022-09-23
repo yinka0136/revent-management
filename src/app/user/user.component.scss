@@ -1,0 +1,15 @@
+
+@import "partials/abstract/mixins.scss";
+@import "partials/abstract/variables.scss";
+
+.main {
+    margin-left: 2.4rem;
+    margin-right: 2.4rem;
+    margin-top: -4.8rem;
+    background: $light-100;
+    backdrop-filter: blur(0.8rem);
+    box-shadow: 0px 12px 24px rgba(37, 99, 235, 0.1);
+    border-radius: 0.8rem;
+    height: 100%;
+    z-index: 100;
+    padding: 1.6rem 2.4rem;}

@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     this._loacalStorageAS.watch('revent_user').subscribe((_res: any) => {
       if (_res) {
         this.user = _res;
-        this.initial = this._utils.getInitial(this.user.userName);
+        this.initial = this._utils.getInitial(this.user);
       }
     });
   }
