@@ -1,6 +1,6 @@
 # ReventManagement
 
-#PLEASE USE NOM RUN PROD to run the app as it makes use of json-server.
+#PLEASE USE NPM RUN PROD to run the app as it makes use of json-server.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
 
 ## Development server
