@@ -2,9 +2,8 @@
   title="Good {{
     hour < 12 ? 'morning' : hour >= 12 && hour <= 17 ? 'afternoon' : 'evening'
   }},  {{ user!.lastName }} {{ user!.firstName }}"
-  paragraph="Welcome. Here’s the latest update on your Klinicly account."
+  paragraph="Welcome. Here’s the latest update on your Revent Management."
 ></app-main-header>
-
 
 <div class="main">
   <div class="row">
@@ -26,7 +25,6 @@
             [loading]="isLoadingDashboardCount"
           ></app-report-card>
         </div>
-       
       </div>
 
       <div class="row">

@@ -53,10 +53,6 @@ body {
   }
 }
 
-.form_line {
-  width: -webkit-fill-available;
-  border: 0.1rem solid rgba($dark, 0.1);
-}
 .pointer {
   cursor: pointer;
   transition: 0.3s all ease-in-out;
@@ -94,7 +90,8 @@ body {
     line-height: 150%;
     color: $body;
   }
-  svg, img {
+  svg,
+  img {
     margin-right: 0.8rem !important;
   }
 
@@ -102,23 +99,6 @@ body {
     border-bottom: none !important;
   }
 }
-
-// table {
-//   font-family: arial, sans-serif;
-//   border-collapse: collapse;
-//   width: 100%;
-// }
-
-// td,
-// th {
-//   border: 1px solid #dddddd;
-//   text-align: left;
-//   padding: 8px;
-// }
-
-// tr:nth-child(even) {
-//   background-color: #dddddd;
-// }
 
 table.table {
   caption {
